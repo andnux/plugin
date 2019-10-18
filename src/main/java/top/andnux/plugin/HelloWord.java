@@ -3,7 +3,7 @@ package top.andnux.plugin;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
- class HelloWord extends DefaultTask {
+ public class HelloWord extends DefaultTask {
     private String message;
     private String recipient;
 
