@@ -1,28 +1,44 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: "com.gradle.plugin-publish"
+apply plugin: "java-gradle-plugin"
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 buildscript {
     repositories {
-        maven { url 'https://jitpack.io' }
-        jcenter()
-        google()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath "com.gradle.publish:plugin-publish-plugin:0.11.0"
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.andnux'
+version = "1.0.0"    //配置插件的版本号
+group = "top.andnux.gradle"   //插件的群组，插件的classpath会用到
 
-group 'top.andnux'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+pluginBundle {
+    website = 'https://www.github.con/andnux'
+    vcsUrl = 'https://www.github.con/andnux/plugin'
+    description = 'jiagu for 360'  //插件描述
+    tags = ['jiagu', '360']  //插件的tag。可以通过这个在插件门户上搜索
+    plugins {
+        jiaguPlugin {
+            id = 'top.andnux.plugin.jiagu'   //插件的id，到时候apply的插件id
+            displayName = 'jiagu plugin'
+        }
+    }
 }
 
 dependencies {
-    compile gradleApi()
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:3.6.2'
+    implementation 'org.aspectj:aspectjtools:1.9.4'
+    implementation 'org.aspectj:aspectjrt:1.9.4'
+    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
 }
